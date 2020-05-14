@@ -10,13 +10,22 @@
 using namespace std;
 
 void imprimeSequencial(int *vetor, int tamanhoDaListaSequencial);
-
+int* alocaVetor(int tam);
 int main(){
     setlocale(LC_ALL,"");
     int cont;
     int vetor[TAM]={1,2,3}, tamanhoDaLista;
 
     imprimeSequencial(vetor,3);
+    putchar('\n');
+    //Lendo novos valores
+    for(cont=0;cont<TAM;cont++)
+        scanf("%d", &vetor[cont]);
+     imprimeSequencial(vetor,3);
+    
+    //Pedindo tamanho do vetor
+    printf("\nDigite o tamanho do vetor: \n");
+    scanf("%d",tamanhoDaLista);
     return 0;
 }
 /*Imprime a lista sequencial*/
@@ -25,4 +34,12 @@ void imprimeSequencial(int *vetor, int tamanhoDaListaSequencial){
     /*Imprime os valores*/
     for(cont=0;cont<tamanhoDaListaSequencial;cont++)
         printf("\nValor %d: %d",cont,vetor[cont]);
+}
+//Aloca um vetor do tamanho pedido
+int* alocaVetor(int tam){
+    //Cria um ponteiro auxiliar
+    int *v;
+    //Aloca memória para o novo vetor
+    v=(int*) malloc(tam * sizeof(int));
+    return v;
 }
