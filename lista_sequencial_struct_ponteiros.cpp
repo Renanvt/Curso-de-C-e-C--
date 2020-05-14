@@ -5,10 +5,29 @@
 #include <conio.h>
 using namespace std;
 void limpaTela();
-struct 
+struct pessoa{
+    string nome;
+    int rg;
+};
+void imprime_sequencial(pessoa *ponteiroSequencial, int tamanhoDaLista);
 int main(){
     int funcaoDesejada=1;
-    int cont;
+    //Ponteiro para lista sequencial
+    pessoa *ponteiroSequencial;
+    //Tamanho da lista
+    int tamanhoDaLista=0;
+
+    //EXEMPLO
+    pessoa *exemploListaSequencial = new pessoa[2];
+    //Dois registros de exemplo:
+    exemploListaSequencial[0].nome = "John";
+    exemploListaSequencial[0].rg = 123;
+    exemploListaSequencial[1].nome = "Maicon";
+    exemploListaSequencial[1].rg = 321;
+    //Faz o ponteiro principal apontar para o novo vetor
+    ponteiroSequencial = exemploListaSequencial;/*Coloca o primeiro elemento da lista sequencial em ponteiroSequencial*/
+    imprime_sequencial(ponteiroSequencial,2);
+
     while(funcaoDesejada<10 && funcaoDesejada>0){
         /*Mostrando  o menu*/
         funcaoDesejada=1;
@@ -41,4 +60,10 @@ int main(){
 }
 void limpaTela(){
     system("CLS");
+}
+void imprime_sequencial(pessoa *ponteiroSequencial, int tamanhoDaLista){
+    int cont;
+    for(cont=0;cont<tamanhoDaLista;cont++){
+        cout << cont << " - " << ponteiroSequencial[cont].nome << "," << ponteiroSequencial[cont].rg << "\n";
+    }
 }
