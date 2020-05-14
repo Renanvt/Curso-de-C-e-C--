@@ -1,4 +1,11 @@
 {
-    "C_Cpp.errorSquiggles": "Disabled"
-    
+    "C_Cpp.errorSquiggles": "Disabled",
+    "terminal.integrated.shellArgs.windows": ["/K", "chcp 1252"],
+    "files.encoding": "utf8bom",
+    "files.autoGuessEncoding": true,
+    "[powershell]": {
+        "files.encoding": "utf8bom",
+        "files.autoGuessEncoding": true
+    }
+
 }

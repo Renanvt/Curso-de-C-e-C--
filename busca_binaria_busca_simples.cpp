@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <locale.h> //Essa biblioteca possui fun��es de regionaliza��o
+#include <clocale> 
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -7,6 +7,8 @@
 #include <conio.h>
 #include <new>
 #include <iostream>
+#include<tchar.h>
+
 #define TAM 10
 using namespace std;
 int buscaSimples(int vetor[TAM],int valorProcurado,int *posicaoEncontrada);
@@ -14,8 +16,8 @@ int buscaBinaria(int vetor[TAM],int valorProcurado,int *posicaoEncontrada);
 void imprime_vetor(int vetor[TAM]);
 
 int main(){
-	setlocale(LC_ALL, "Portuguese");
-
+	setlocale(LC_ALL, "");
+    _tsetlocale(LC_ALL, _T("portuguese"));
     int vetor[TAM] = {1,23,44,56,63,72,84,90,98};
     int valorProcurado;
     int posicao, posicaoEncontrada;
