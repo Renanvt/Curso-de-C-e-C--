@@ -27,27 +27,27 @@ int main(){
 
     imprime_vetor(vetor);
 
-    printf("\nQual número deseja encontrar?\n");
+    printf("\nQual numero deseja encontrar?\n");
     scanf("%d",&valorProcurado);
 
 
 
     if(buscaSimples(vetor,valorProcurado,&posicaoEncontrada) == 1)
-        printf("O valor foi encontrado na posição %d\n",posicaoEncontrada);
+        printf("O valor foi encontrado na posicao %d\n",posicaoEncontrada);
     else
         printf("Valor não encontrado\n");
 
     imprime_vetor(vetor);
 
-    printf("\nQual número deseja encontrar?\n");
+    printf("\nQual numero deseja encontrar?\n");
     scanf("%d",&valorProcurado);
 
 
 
     if(buscaBinaria(vetor,valorProcurado,&posicaoEncontrada) == 1)
-        printf("O valor foi encontrado na posição %d",posicaoEncontrada);
+        printf("O valor foi encontrado na posicao %d",posicaoEncontrada);
     else
-        printf("Valor não encontrado");
+        printf("Valor nao encontrado");
 
 
 	return(0);
