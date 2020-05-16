@@ -6,6 +6,9 @@
     "[powershell]": {
         "files.encoding": "utf8bom",
         "files.autoGuessEncoding": true
+    },
+    "files.associations": {
+        "iostream": "cpp"
     }
 
 }
