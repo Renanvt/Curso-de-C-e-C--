@@ -15,7 +15,8 @@ void adcComecoSequencial(pessoa *&ponteiroSequencial, int *tamanhoDaLista, strin
 void adcFimSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, string nome,int rg);
 void adcPosicaoSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, string nome,int rg, int posicao);
 void removeInicioSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista);
-
+void removeFimSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista);
+void removePosicaoSequencial(pessoa *&ponteiroSequencial, int *tamanhoDaLista, int posicao);
 int main(){
     int funcaoDesejada=1;
     //Ponteiro para lista sequencial
@@ -126,6 +127,26 @@ int main(){
                         removeFimSequencial(ponteiroSequencial,&tamanhoDaLista);
                     }
                     break;
+                case 6:
+                    cout << "Funcao escolhida: 5- Retirar um node na posicao N\n";
+                   
+                       //Se a lista for vazia
+                    if(tamanhoDaLista==0){
+                        cout << "\nLista Vazia!\n";
+                    }else{
+                        cout << "Digite uma posicao\n";
+                        cin >> posicao;
+                        if(posicao==0){
+                            removeInicioSequencial(ponteiroSequencial,&tamanhoDaLista);
+                        }else if(posicao==tamanhoDaLista-1){
+                            removeFimSequencial(ponteiroSequencial,&tamanhoDaLista);
+                        }else if(posicao>tamanhoDaLista-1){
+                            cout << "Posicao nao existe\n";
+                        }else{
+                             removePosicaoSequencial(ponteiroSequencial,&tamanhoDaLista,posicao);
+                        }
+                    }
+                    break;
                     
         }
         
@@ -226,6 +247,7 @@ void adcPosicaoSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, strin
         *tamanhoDaLista = *tamanhoDaLista +1;
 }
 void removeInicioSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista){
+
     //Cria um vetor com uma posição a menos
     pessoa *novaListaSequencial = new pessoa[*tamanhoDaLista -1];
 
@@ -240,4 +262,41 @@ void removeInicioSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista){
 
         //Reduz o tamanho da lista
         *tamanhoDaLista = *tamanhoDaLista -1;
+}
+void removeFimSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista){
+    //Cria um vetor com uma posição a menos
+    pessoa *novaListaSequencial = new pessoa [*tamanhoDaLista-1];
+    //Passa os elementos do vetor antigo para o novo menos o último
+    int cont;
+    for(cont=0;cont<*tamanhoDaLista-1;cont++){
+        novaListaSequencial[cont].nome=ponteiroSequencial[cont].nome;
+        novaListaSequencial[cont].rg=ponteiroSequencial[cont].rg;
+    }
+    //Atualiza o ponteiro para a lista nova
+    ponteiroSequencial=novaListaSequencial;
+
+    //Reduz o tamanho da lista
+    *tamanhoDaLista=*tamanhoDaLista-1;
+}
+void removePosicaoSequencial(pessoa *&ponteiroSequencial, int *tamanhoDaLista, int posicao){
+    //Cria um vetor com uma posicao a menos
+    pessoa *novaListaSequencial = new pessoa[*tamanhoDaLista-1];
+    //Passa os valores de acordo com o contador
+    int cont;
+    for(cont=0;cont< *tamanhoDaLista-1;cont++){
+        if(cont<posicao){
+            //Se estiver antes da posicao passa normalmente
+            novaListaSequencial[cont].nome=ponteiroSequencial[cont].nome;
+            novaListaSequencial[cont].rg=ponteiroSequencial[cont].rg;
+        }else{
+            //Se estiver antes da posicao passa normalmente
+            novaListaSequencial[cont].nome=ponteiroSequencial[cont+1].nome;
+            novaListaSequencial[cont].rg=ponteiroSequencial[cont+1].rg;
+        }
+    }
+     //Atualiza o ponteiro para a lista nova
+    ponteiroSequencial=novaListaSequencial;
+
+    //Reduz o tamanho da lista
+    *tamanhoDaLista=*tamanhoDaLista-1;
 }
