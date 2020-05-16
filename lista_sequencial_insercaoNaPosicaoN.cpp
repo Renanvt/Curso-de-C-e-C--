@@ -14,7 +14,7 @@ void imprime_sequencial(pessoa *ponteiroSequencial, int tamanhoDaLista);
 void adcComecoSequencial(pessoa *&ponteiroSequencial, int *tamanhoDaLista, string nome,int rg);
 void adcFimSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, string nome,int rg);
 void adcPosicaoSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, string nome,int rg, int posicao);
-
+void removeInicioSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista);
 
 int main(){
     int funcaoDesejada=1;
@@ -106,6 +106,24 @@ int main(){
                     }else{
                         //Adiciona em uma posição específica
                         adcPosicaoSequencial(ponteiroSequencial,&tamanhoDaLista,nome,rg,posicao);
+                    }
+                    break;
+                case 4:
+                     cout << "Funcao escolhida: 4- Retirar um node no início da lista \n";
+                    //Se a lista for vazia
+                    if(tamanhoDaLista==0){
+                        cout << "\nLista Vazia!\n";
+                    }else{
+                        removeInicioSequencial(ponteiroSequencial,&tamanhoDaLista);
+                    }
+                    break;
+                case 5:
+                      cout << "Funcao escolhida: 5- Retirar um node no final da lista \n";
+                       //Se a lista for vazia
+                    if(tamanhoDaLista==0){
+                        cout << "\nLista Vazia!\n";
+                    }else{
+                        removeFimSequencial(ponteiroSequencial,&tamanhoDaLista);
                     }
                     break;
                     
@@ -206,6 +224,20 @@ void adcPosicaoSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, strin
 
         //Aumenta o tamanho da lista
         *tamanhoDaLista = *tamanhoDaLista +1;
+}
+void removeInicioSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista){
+    //Cria um vetor com uma posição a menos
+    pessoa *novaListaSequencial = new pessoa[*tamanhoDaLista -1];
 
+    //Passa os elementos do vetor antigo para o novo
+    int cont;
+    for(cont=1;cont< *tamanhoDaLista;cont++){
+            novaListaSequencial[cont-1].nome=ponteiroSequencial[cont].nome; 
+            novaListaSequencial[cont-1].rg=ponteiroSequencial[cont].rg; 
+    }
+     //Atualiza o ponteiro para a lista nova
+        ponteiroSequencial=novaListaSequencial;
 
+        //Reduz o tamanho da lista
+        *tamanhoDaLista = *tamanhoDaLista -1;
 }
