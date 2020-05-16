@@ -13,6 +13,8 @@ void limpaTela();
 void imprime_sequencial(pessoa *ponteiroSequencial, int tamanhoDaLista);
 void adcComecoSequencial(pessoa *&ponteiroSequencial, int *tamanhoDaLista, string nome,int rg);
 void adcFimSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, string nome,int rg);
+void adcPosicaoSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, string nome,int rg, int posicao);
+
 
 int main(){
     int funcaoDesejada=1;
@@ -35,6 +37,7 @@ int main(){
 
     while(funcaoDesejada<10 && funcaoDesejada>0){
         //Imprime a lista sequencial
+      
         imprime_sequencial(ponteiroSequencial,tamanhoDaLista);//O tamanho da lista vai ser atualizado conforme for adicionando novos valores
 
         /*Mostrando  o menu*/
@@ -56,7 +59,7 @@ int main(){
 
         /*Variáveis criadas nas operações*/
         string nome;
-        int rg;
+        int rg, posicao;
         //Chama a opcao desejada
         switch(funcaoDesejada){
                 case 1:
@@ -73,6 +76,7 @@ int main(){
                     cin >> nome;
                     cout << "Digite um RG:\n";
                     cin >> rg;
+
                     //Se a lista for vazia, usamos a função de criar no inicio
                     if(tamanhoDaLista==0){
                         adcComecoSequencial(ponteiroSequencial,&tamanhoDaLista, nome, rg);
@@ -80,8 +84,30 @@ int main(){
                         adcFimSequencial(ponteiroSequencial,&tamanhoDaLista,nome,rg);
                     }
                     break;
-              
+                case 3:
+                    cout << "Funcao escolhida: 3 - Insercao de um node na posicao N\n";
+                    cout << "Digite uma posicao\n";
+                    cin >> posicao;
+                    cout << "Digite um nome:\n";
+                    cin >> nome;
+                    cout << "Digite um RG:\n";
+                    cin >> rg;
+                   
 
+                    
+                    if(posicao == 0){
+                        //Se estiver que adc no começo
+                         adcComecoSequencial(ponteiroSequencial,&tamanhoDaLista, nome, rg);
+                    }else if(posicao==tamanhoDaLista){
+                        //Se estiver que adc no fim
+                        adcFimSequencial(ponteiroSequencial,&tamanhoDaLista,nome,rg);
+                    }else if(posicao>tamanhoDaLista){
+                        cout << "Digite uma posicao valida\n";
+                    }else{
+                        //Adiciona em uma posição específica
+                        adcPosicaoSequencial(ponteiroSequencial,&tamanhoDaLista,nome,rg,posicao);
+                    }
+                    break;
                     
         }
         
@@ -152,4 +178,34 @@ void adcFimSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, string no
 
         //Aumenta o tamanho da lista
         *tamanhoDaLista = *tamanhoDaLista +1;
+}
+
+void adcPosicaoSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, string nome,int rg, int posicao){
+        //Criar uma lista com um tamanho maior
+        pessoa *novaListaSequencial = new pessoa[*tamanhoDaLista + 1];
+
+        //Passa os elementos do vetor antigo para o novo até 1 antes da posição que se quer modificar
+        int cont;
+        for(cont=0;cont< posicao;cont++){
+            novaListaSequencial[cont].nome=ponteiroSequencial[cont].nome; 
+            novaListaSequencial[cont].rg=ponteiroSequencial[cont].rg; 
+        }
+
+        //Adiciona o novo registro na posição correta
+        novaListaSequencial[posicao].nome=nome;
+        novaListaSequencial[posicao].rg=rg;
+
+        //Coloca o resto dos valores antigos
+        for(cont=posicao+1;cont< *tamanhoDaLista+1;cont++){
+            novaListaSequencial[cont].nome=ponteiroSequencial[cont-1].nome; 
+            novaListaSequencial[cont].rg=ponteiroSequencial[cont-1].rg; 
+        }
+
+         //Atualiza o ponteiro para a lista nova
+        ponteiroSequencial=novaListaSequencial;
+
+        //Aumenta o tamanho da lista
+        *tamanhoDaLista = *tamanhoDaLista +1;
+
+
 }
