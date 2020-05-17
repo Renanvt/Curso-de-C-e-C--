@@ -17,6 +17,7 @@ void adcPosicaoSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, strin
 void removeInicioSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista);
 void removeFimSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista);
 void removePosicaoSequencial(pessoa *&ponteiroSequencial, int *tamanhoDaLista, int posicao);
+string retornaNomeSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, int rg);
 int main(){
     int funcaoDesejada=1;
     //Ponteiro para lista sequencial
@@ -36,10 +37,10 @@ int main(){
     //ponteiroSequencial = exemploListaSequencial;/*Coloca o primeiro elemento da lista sequencial em ponteiroSequencial*/
     
 
-    while(funcaoDesejada<10 && funcaoDesejada>0){
+    while(funcaoDesejada<9 && funcaoDesejada>0){
         //Imprime a lista sequencial
       
-        imprime_sequencial(ponteiroSequencial,tamanhoDaLista);//O tamanho da lista vai ser atualizado conforme for adicionando novos valores
+        //O tamanho da lista vai ser atualizado conforme for adicionando novos valores
 
         /*Mostrando  o menu*/
         
@@ -147,7 +148,21 @@ int main(){
                         }
                     }
                     break;
+                case 7:
+                    cout << "Funcao escolhida: 7 - Procurar um nome com o campo RG \n";
+                       //Se a lista for vazia
+                    if(tamanhoDaLista==0){
+                        cout << "\nLista Vazia!\n";
+                    }else{
+                        cout << "Digite um RG\n";
+                        cin >> rg;
+                        cout << "Nome do RG: " << rg << ":" << retornaNomeSequencial(ponteiroSequencial, &tamanhoDaLista, rg) <<"\n\n";
+                    }
                     
+                    break;
+                case 8:
+                    imprime_sequencial(ponteiroSequencial,tamanhoDaLista);
+                    break;               
         }
         
     }
@@ -289,7 +304,7 @@ void removePosicaoSequencial(pessoa *&ponteiroSequencial, int *tamanhoDaLista, i
             novaListaSequencial[cont].nome=ponteiroSequencial[cont].nome;
             novaListaSequencial[cont].rg=ponteiroSequencial[cont].rg;
         }else{
-            //Se estiver antes da posicao passa normalmente
+            //Se estiver depois da posicao passa oque esta na frente, ignorando cont==posicao
             novaListaSequencial[cont].nome=ponteiroSequencial[cont+1].nome;
             novaListaSequencial[cont].rg=ponteiroSequencial[cont+1].rg;
         }
@@ -299,4 +314,15 @@ void removePosicaoSequencial(pessoa *&ponteiroSequencial, int *tamanhoDaLista, i
 
     //Reduz o tamanho da lista
     *tamanhoDaLista=*tamanhoDaLista-1;
+}
+string retornaNomeSequencial(pessoa *&ponteiroSequencial,int *tamanhoDaLista, int rg){
+    string nome = "Nao Encontrado";
+    //Busca pelo nome com o rg digitado
+    int cont;
+    for(cont=0;cont<*tamanhoDaLista;cont++){
+        if(ponteiroSequencial[cont].rg==rg){
+            nome=ponteiroSequencial[cont].nome;
+        }
+    }
+    return nome;
 }

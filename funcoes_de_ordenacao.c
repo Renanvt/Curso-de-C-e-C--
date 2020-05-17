@@ -1,13 +1,11 @@
 #include <stdio.h>
-#include <locale.h> //Essa biblioteca possui fun��es de regionaliza��o
+#include <locale.h>
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdbool.h>
 #include <conio.h>
-#include <iostream>
 #define TAM 10
-using namespace std;
 void imprime_vetor(int vetor[TAM]);
 void bubble_sort(int vetor[TAM]);
 void selection_sort(int vetor[TAM]);

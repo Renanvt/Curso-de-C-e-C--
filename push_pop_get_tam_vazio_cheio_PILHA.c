@@ -1,13 +1,13 @@
 #include <stdio.h>
-#include <locale.h> //Essa biblioteca possui funções de regionalização
+#include <locale.h> 
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdbool.h>
 #include <conio.h>
-#include <iostream>
+
 #define TAM 4
-using namespace std;
+
 bool pilha_vazia(int topo);
 bool pilha_cheia(int topo);
 void pilha_push(int pilha[TAM],int valor, int *topo);
@@ -16,6 +16,8 @@ void imprime_vetor(int vetor[TAM],int topo);
 void pilha_construtor(int pilha[TAM],int *topo);
 int pilha_tamanho(int topo);
 int pilha_get(int pilha[TAM],int *topo);
+
+
 int main(){
 	setlocale(LC_ALL, "Portuguese");
 	int pilha[TAM];
@@ -31,8 +33,10 @@ int main(){
     if(pilha_cheia(topo))
         printf("\nA pilha está cheia");
 
-	return(0);
+	return 0;
 }
+
+
 /*Cria a pilha e limpa ela*/
 void pilha_construtor(int pilha[TAM],int *topo){
     /*Coloca o topo negativo para indicar uma pilha vazia*/
@@ -85,7 +89,7 @@ void imprime_vetor(int vetor[TAM],int topo){
 void pilha_push(int pilha[TAM],int valor, int *topo){
 /*Caso não possa colocar mais valores*/
 	if(pilha_cheia(*topo))
-        cout << "Pilha cheia!";
+        printf("Pilha cheia!");
     else{
         *topo += 1;
         pilha[*topo] = valor;
@@ -94,7 +98,7 @@ void pilha_push(int pilha[TAM],int valor, int *topo){
 /*Remove um valor no topo da pilha*/
 void pilha_pop(int pilha[TAM], int *topo){
     if(pilha_vazia(*topo))
-        cout << "\nA pilha ja esta vazia\n";
+        printf("\nA pilha ja esta vazia\n");
     else{
         printf("\nValor Removido: %d\n",pilha[*topo]);
         pilha[*topo] = 0;
