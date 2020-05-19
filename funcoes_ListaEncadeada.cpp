@@ -13,6 +13,7 @@ int retornaTamanho(pessoa *ponteiroEncadeada);
 void imprimeEncadeada(pessoa *ponteiroEncadeada);
 void adcComecoEncadeada(pessoa *&ponteiroEncadeada, string nome, int rg);
 void adcFimEncadeada(pessoa *&ponteiroEncadeada, string nome, int rg);
+void adcPosicaoEncadeada(pessoa *&ponteiroEncadeada,string nome,int rg,int posicao);
 
 int main(){
     int funcaoDesejada;
@@ -61,13 +62,14 @@ int main(){
         }
        
         //Retorna o tamanho
-        cout << "Tamanho atual: "<< retornaTamanho(ponteiroEncadeada) << "\n";
+        cout << "\nTamanho atual: "<< retornaTamanho(ponteiroEncadeada) << "\n";
 
         cout << "\nEscolha um numero e pressione ENTER: \n";
         cin >> funcaoDesejada;
         //Variavéis para valores novos
         string nome;
         int rg;
+        int posicao;
         limpaTela();
         switch(funcaoDesejada){
             case 1:
@@ -91,7 +93,22 @@ int main(){
                 }
                 break;
             case 3:
-                cout << "Funcao escolhida: 3\n";
+                cout << "Funcao escolhida: 3 - Insercao de um node na posicao N\n";
+                cout << "Digite a posicao:\n";
+                cin >> posicao;
+                cout << "Digite o nome:\n";
+                cin >> nome;
+                cout << "Digite o RG:\n";
+                cin >> rg;
+                if(posicao==0){
+                     adcComecoEncadeada(ponteiroEncadeada,nome,rg);
+                }else if(posicao==retornaTamanho(ponteiroEncadeada)-1){
+                    adcFimEncadeada(ponteiroEncadeada,nome,rg);
+                }else if(posicao>retornaTamanho(ponteiroEncadeada)){
+                    cout << "Digite uma posicao valida\n";
+                }else{
+                      adcPosicaoEncadeada(ponteiroEncadeada,nome,rg,posicao);
+                }
                 break;
             case 4:
                 cout << "Funcao escolhida: 4\n";
@@ -170,5 +187,31 @@ void adcFimEncadeada(pessoa *&ponteiroEncadeada, string nome, int rg){
         }
         p=p->proximo;//Atualiza o cursor
         
+    }
+}
+void adcPosicaoEncadeada(pessoa *&ponteiroEncadeada,string nome,int rg,int posicao){
+    pessoa *novoValor = new pessoa;
+    novoValor->nome=nome;
+    novoValor->rg=rg;
+    novoValor->proximo=NULL;
+
+    pessoa *p = ponteiroEncadeada;//Cursor
+    //Contador de posicoes
+    int cont=0;
+    while(cont <= posicao){
+        //Quando chega 1 antes da posição desejada
+        if(cont == posicao-1){
+            //auxiliar do valor
+            pessoa *aux = new pessoa;
+            //Armazena o próximo valor
+            aux->proximo= p->proximo;
+            //Coloca o novo valor como o próximo dele
+            p->proximo= novoValor;
+            //Faz com que o novo valor aponte para o próximo
+            novoValor->proximo=aux->proximo;
+            free(aux);
+        }
+        p=p->proximo; //Atualizar o cursor
+        cont++;
     }
 }
