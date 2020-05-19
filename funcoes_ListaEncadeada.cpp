@@ -10,13 +10,14 @@ struct pessoa{
 };
 void limpaTela();
 int retornaTamanho(pessoa *ponteiroEncadeada);
-void imprimeEncadeada(pessoa *ponteiroEncadeada);
 void adcComecoEncadeada(pessoa *&ponteiroEncadeada, string nome, int rg);
 void adcFimEncadeada(pessoa *&ponteiroEncadeada, string nome, int rg);
 void adcPosicaoEncadeada(pessoa *&ponteiroEncadeada,string nome,int rg,int posicao);
 void removeInicioEncadeada(pessoa *&ponteiroEncadeada);
 void removeFimEncadeada(pessoa *&ponteiroEncadeada);
 void removePosicaoEncadeada(pessoa *&ponteiroEncadeada,int posicao);
+string retornaNomeEncadeada(pessoa *&ponteiroEncadeada,int rg);
+void imprimeEncadeada(pessoa *ponteiroEncadeada);
 int main(){
     int funcaoDesejada;
     //Cria o inicio da lista encadeada
@@ -109,7 +110,7 @@ int main(){
                 }else if(posicao>retornaTamanho(ponteiroEncadeada)){
                     cout << "Digite uma posicao valida\n";
                 }else{
-                      removeFimEncadeada(ponteiroEncadeada);
+                      adcPosicaoEncadeada(ponteiroEncadeada,nome,rg,posicao);
                 }
                 break;
             case 4:
@@ -117,7 +118,7 @@ int main(){
                  removeInicioEncadeada(ponteiroEncadeada);
                 break;
             case 5:
-                cout << "Funcao escolhida: 4 - Retirar um node do fim da lista\n";
+                cout << "Funcao escolhida: 5 - Retirar um node do fim da lista\n";
                 if(retornaTamanho(ponteiroEncadeada)==1){
                     removeInicioEncadeada(ponteiroEncadeada);
                 }else{
@@ -137,6 +138,21 @@ int main(){
                 }else{
                     removePosicaoEncadeada(ponteiroEncadeada,posicao);
                 }
+                break;
+            case 7:
+                cout << "Funcao escolhida:  7 - Procurar um node com o campo RG\n";
+                cout << "Digite o RG:\n";
+                //RG buscado pelo usuário
+                cin >> rg;
+            
+                cout << "O nome do RG " << rg << " eh: " << retornaNomeEncadeada(ponteiroEncadeada,rg) <<"\n";
+                break;
+            case 8:
+                limpaTela();
+                imprimeEncadeada(ponteiroEncadeada);
+                putchar('\n');
+                system("pause");
+                limpaTela();
                 break;
         }
     }
@@ -163,16 +179,6 @@ int retornaTamanho(pessoa *ponteiroEncadeada){
         tamanho++;
     }
     return tamanho;
-}
-void imprimeEncadeada(pessoa *ponteiroEncadeada){
-    //Ponteiro cursor auxiliar
-    pessoa *p= ponteiroEncadeada;
-    while(p != NULL){
-        //Imprime a lista
-        cout << p->nome << "," << p->rg << "\n";
-        p=p->proximo;//Atualiza o cursor
-        
-    }
 }
 void adcComecoEncadeada(pessoa *&ponteiroEncadeada, string nome, int rg){
     //Cria uma nova estrutura
@@ -231,7 +237,7 @@ void adcPosicaoEncadeada(pessoa *&ponteiroEncadeada,string nome,int rg,int posic
             free(aux);
         }
         p=p->proximo; //Atualizar o cursor
-        cont++;
+        cont=cont+1;
     }
 }
 void removeInicioEncadeada(pessoa *&ponteiroEncadeada){
@@ -286,4 +292,42 @@ void removePosicaoEncadeada(pessoa *&ponteiroEncadeada,int posicao){
         //Registra uma movimentação
         cont++;
     }
+}
+string retornaNomeEncadeada(pessoa *&ponteiroEncadeada,int rg){
+    //Nome a ser retornado
+    string nome= "Nao encontrado";
+    //Ponteiro cursor auxiliar
+    pessoa *p = ponteiroEncadeada;
+
+    //Passa pela lista
+    while(p != NULL){
+        //Quando encontra o RG
+        if(p->rg==rg){
+            //Recebe o nome do rg encontrado
+            nome= p->nome;
+            return nome;
+        }
+        p=p->proximo;
+    }
+    return nome;
+}
+void imprimeEncadeada(pessoa *ponteiroEncadeada){
+    //Cabecalho da Lista
+    //cout << "Lista{tamanho:"<< retornaTamanhoListaEncadeada(*ponteiroEncadeada)
+
+    //Ponteiro Auxiliar para percorrer a lista
+    pessoa *p = ponteiroEncadeada;
+    //Mostra a posicao do elemento
+    int posicao=0;
+    //Enquanto o p nao for nulo
+    while(p != NULL){
+        //Imprime o valor da lista
+        cout << posicao << " - " << p->nome << ", "<< p->rg << "\n";
+        //Transforma o P no endereco do proximo valor, caso o endereco seja NULL, estamos no fim da lista
+        p=p->proximo;
+        //Incrementa a variavel da posicao dos elementos
+        posicao++;
+    }
+    //Libera memoria
+    free(p);
 }
