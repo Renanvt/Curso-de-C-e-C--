@@ -14,7 +14,9 @@ void imprimeEncadeada(pessoa *ponteiroEncadeada);
 void adcComecoEncadeada(pessoa *&ponteiroEncadeada, string nome, int rg);
 void adcFimEncadeada(pessoa *&ponteiroEncadeada, string nome, int rg);
 void adcPosicaoEncadeada(pessoa *&ponteiroEncadeada,string nome,int rg,int posicao);
-
+void removeInicioEncadeada(pessoa *&ponteiroEncadeada);
+void removeFimEncadeada(pessoa *&ponteiroEncadeada);
+void removePosicaoEncadeada(pessoa *&ponteiroEncadeada,int posicao);
 int main(){
     int funcaoDesejada;
     //Cria o inicio da lista encadeada
@@ -107,17 +109,34 @@ int main(){
                 }else if(posicao>retornaTamanho(ponteiroEncadeada)){
                     cout << "Digite uma posicao valida\n";
                 }else{
-                      adcPosicaoEncadeada(ponteiroEncadeada,nome,rg,posicao);
+                      removeFimEncadeada(ponteiroEncadeada);
                 }
                 break;
             case 4:
-                cout << "Funcao escolhida: 4\n";
+                 cout << "Funcao escolhida: 4 - Retirar um node do inicio da lista\n";
+                 removeInicioEncadeada(ponteiroEncadeada);
                 break;
             case 5:
-                cout << "Funcao escolhida: 5\n";
+                cout << "Funcao escolhida: 4 - Retirar um node do fim da lista\n";
+                if(retornaTamanho(ponteiroEncadeada)==1){
+                    removeInicioEncadeada(ponteiroEncadeada);
+                }else{
+                    removeFimEncadeada(ponteiroEncadeada);
+                }
                 break;
             case 6:
-                cout << "Funcao escolhida: 6\n";
+                cout << "Funcao escolhida: 6 - Retirar um node na posicao N\n";
+                cout << "Digite a posicao:\n";
+                cin >> posicao;
+                if(posicao==0){
+                    removeInicioEncadeada(ponteiroEncadeada);
+                }else if(posicao == retornaTamanho(ponteiroEncadeada)-1){
+                    removeFimEncadeada(ponteiroEncadeada);
+                }else if(posicao > retornaTamanho(ponteiroEncadeada)){
+                    cout << "Digite uma posicao valida\n";
+                }else{
+                    removePosicaoEncadeada(ponteiroEncadeada,posicao);
+                }
                 break;
         }
     }
@@ -212,6 +231,59 @@ void adcPosicaoEncadeada(pessoa *&ponteiroEncadeada,string nome,int rg,int posic
             free(aux);
         }
         p=p->proximo; //Atualizar o cursor
+        cont++;
+    }
+}
+void removeInicioEncadeada(pessoa *&ponteiroEncadeada){
+    //Se só existir um membro na lista
+    if(ponteiroEncadeada->proximo==NULL){
+        //Cria uma nova estrutura vazia
+        pessoa *novoValor=new pessoa;
+        novoValor->nome="";
+        novoValor->rg=0;
+        novoValor->proximo=NULL;
+        ponteiroEncadeada=novoValor;
+    }else{
+        //Faz o ponteiro principal se transformar no apontamento para o próximo valor, deixando o apontamento para o valor antigo perdido na memória
+        ponteiroEncadeada= ponteiroEncadeada->proximo;
+    }
+}
+void removeFimEncadeada(pessoa *&ponteiroEncadeada){      
+    //Auxiliares
+    pessoa *p = new pessoa;
+    pessoa *aux = new pessoa;
+
+    //Primeiro cursor auxiliar
+    p = ponteiroEncadeada;
+
+    //Passa pela lista
+    while(p->proximo != NULL){
+        //O auxiliar sempre fica sendo 1 antes do cursor
+        aux = p;
+        //Passa o cursor para o próximo elemento
+        p=p->proximo;
+    }
+    //Muda o final da lista para o penúltimo elemento
+    aux->proximo = NULL;
+}
+void removePosicaoEncadeada(pessoa *&ponteiroEncadeada,int posicao){
+    //Ponteiro cursor auxiliar
+    pessoa *p = ponteiroEncadeada;
+    //Contador de posições
+    int cont=0;
+    while(cont<=posicao){
+        if(cont == posicao-1){
+            //Cria um auxiliar
+            pessoa *aux = new pessoa;
+            //Auxiliar recebe o elemento que será eliminado
+            aux=p->proximo;
+            //Faz com que o próximo pule um elemento
+            p->proximo=aux->proximo;
+            free(aux);
+        }
+        //Passa o cursor para o próximo elemento
+        p=p->proximo;
+        //Registra uma movimentação
         cont++;
     }
 }
