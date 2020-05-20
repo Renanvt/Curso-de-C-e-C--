@@ -42,10 +42,17 @@ void exibeStatus(string palavraComMascara, int tamanhoDaPalavra,int tentativasRe
 
        
 }
-int jogarSozinho(){
-    
+int jogar(int numeroDeJogadores){
     //Palavra a ser adivinhada
-    string palavra = retornaPalavraArleatoria();
+    string palavra;
+    //Confere o número de jogadores
+    if(numeroDeJogadores == 1){
+        //Palavra a ser adivinhada
+        palavra = retornaPalavraArleatoria();
+    }else{
+        cout << "Digite uma palavra:";
+        cin >> palavra;
+    }
     //Tamanho da palavra
     int tamanhoDaPalavra = palavra.size();
     
@@ -141,9 +148,10 @@ void menuInicial(){
     //Enquanto o jogador não digita uma opcao válida mostra o menu novamento
     while(opcao<1 || opcao>3){
         cout << "Bem vindo ao Jogo\n";
-        cout << "1 - Jogar\n";
-        cout << "2 - Sobre\n";
-        cout << "3 - Sair\n";
+        cout << "1 - Jogar sozinho\n";
+        cout << "2 - Jogar em dupla\n";
+        cout << "3 - Sobre\n";
+        cout << "4 - Sair\n";
         cout << "\nEscolha uma opcao e tecle ENTER:\n";
         cin >> opcao;
         limpaTela();
@@ -151,11 +159,16 @@ void menuInicial(){
         switch(opcao){
             case 1:
                 //Inicia o jogo
-                if(jogarSozinho() == 1){
+                if(jogar(1) == 1){
                     menuInicial();    
                 }
                 break;
             case 2:
+                if(jogar(2)==1){
+                    menuInicial();
+                }
+                break;
+            case 3:
                 //Informacoes do jogo
                 limpaTela();
                 cout << "Jogo desenvolvido por Jonatan Renan em 2020\n";
