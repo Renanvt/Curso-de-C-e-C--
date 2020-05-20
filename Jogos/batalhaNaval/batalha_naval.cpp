@@ -43,7 +43,7 @@ void exibeMapa(){
 }
 void exibeTabuleiro(char tabuleiro[10][10],char mascara[10][10], bool mostraGabarito){
      //A 5. Posição do vetor corresponde a cor: 0 - Cinza ,1- Vermelho, 2 - Verde, 3 - Amarelo,4 - Azul, 5 - Rosa, 9 - Cor normal
-     char blue[] = { 0x1b, '[', '1', ';', '3', '4', 'm', 0 };
+    char blue[] = { 0x1b, '[', '1', ';', '3', '4', 'm', 0 };
     char green[] = { 0x1b, '[', '1', ';', '3', '2', 'm', 0 };
     char normal[] = { 0x1b, '[', '1', ';', '3', '9', 'm', 0 };
     
