@@ -1,14 +1,18 @@
 ﻿#include <iostream>
-#include <new>
 #include <stdio.h>
+#include <string>
 #include <stdlib.h>
 using namespace std;
 //área de cabeçalho de definição de funcoes
 void menuInicial();
+
+   
+    
 void limpaTela(){
-    system("cls");
+    system("CLS");
 }
 void iniciaTabuleiro(char tabuleiro[3][3]){
+    //Navega por cada posição do tabuleiro e coloca o símbolo de '-'
     int i,j;
      for(i=0;i<3;i++){
         for(j=0;j<3;j++){
@@ -18,17 +22,24 @@ void iniciaTabuleiro(char tabuleiro[3][3]){
 
 }
 void exibeTabuleiro(char tabuleiro[3][3]){
+    //Exibe o tabuleiro com suas linhas e colunas quebrando a linha ao sair de um for
+    char blue[] = { 0x1b, '[', '1', ';', '3', '4', 'm', 0 };
+    char green[] = { 0x1b, '[', '1', ';', '3', '2', 'm', 0 };
+    char normal[] = { 0x1b, '[', '1', ';', '3', '9', 'm', 0 };
     int i,j;
+    cout << "\n";
      for(i=0;i<3;i++){
         for(j=0;j<3;j++){
-            cout << tabuleiro[i][j];
+            cout << green << tabuleiro[i][j] << normal;
         }
         cout << "\n";
     }
+   
 }
 //1 = x venceu, 2 = o venceu, 0 = velha
 int confereTabuleiro(char tabuleiro[3][3]){
-    int i,j;
+   
+  
      //Confere se o jogador venceu nas linhas horizontais
        /* if(tabuleiro[0][0]== 'x' && tabuleiro[0][0] == tabuleiro[0][1] && tabuleiro[0][1] == tabuleiro[0][2]){
             cout << "O Jogador x venceu";
@@ -44,7 +55,7 @@ int confereTabuleiro(char tabuleiro[3][3]){
         }
         
         */
-
+        int i,j;
         //Confere linhas
         for(i=0;i<3;i++){
              if(tabuleiro[i][0]== 'x' && tabuleiro[i][0] == tabuleiro[i][1] && tabuleiro[i][1] == tabuleiro[i][2]){
@@ -63,6 +74,7 @@ int confereTabuleiro(char tabuleiro[3][3]){
         }
         // Confere diagonal principal
         if(tabuleiro[0][0] != '-' && tabuleiro[0][0] == tabuleiro[1][1] && tabuleiro[1][1] == tabuleiro[2][2]){
+
             if(tabuleiro[0][0] == 'x'){
                return 1;
             }else{
@@ -78,37 +90,45 @@ int confereTabuleiro(char tabuleiro[3][3]){
             }
         }       
         return 0;
+       
 }
 void exibeInstrucoes(){
-    cout << "Mapa de Posicoes: \n";
-    cout << " 7|8|9\n";
-    cout << " 4|5|6\n";
-    cout << " 1|2|3\n";
+    cout << "\nMapa de Posicoes: \n";
+    cout << " 7 | 8 | 9\n";
+    cout << " 4 | 5 | 6\n";
+    cout << " 1 | 2 | 3\n";
 
 }
 void jogo(string nomeDoJogadorUm, string nomeDoJogadorDois, int pontuacaoJogadorUm, int pontuacaoJogadorDois){
+ 
+  
     ///VARIAVEIS GERAIS
-    char tabuleiro[3][3]; //Tabuleiro do Jogo
-    int linhaJogada, colunaJogada,posicaoJogada;  // Posicção em que o jogador posiciona sua marca
-    int i,j;
-    int estadoDeJogo=1; // 0 = Sem jogo, 1 = Em jogo
-    int turnoDoJogador=1; // 1=x, 2=o
-    static int rodada=0; // Quantas vezes os jogadores jogaram no total
-    //Coloca os '-' no tabuleiro para indiciar o vazio
     string nomeDoJogadorAtual; // Nome dos jogadores;
+    char tabuleiro[3][3]; //Tabuleiro do Jogo
+     int i,j;
+    int linhaJogada,colunaJogada,posicaoJogada;  // Posicção em que o jogador posiciona sua marca
+   
+    int estadoDeJogo = 1; // 0 = Sem jogo, 1 = Em jogo
+    int turnoDoJogador = 1; // 1=x, 2=o
+    int rodada = 0; // Quantas vezes os jogadores jogaram no total
+    //Coloca os '-' no tabuleiro para indiciar o vazio
+    
     int opcao; //Opcao de inicio
-    bool posicionouJogada = false; //Verifica se o Jogador colocu um marcador no tabuleiro
+    bool posicionouJogada; //Verifica se o Jogador colocu um marcador no tabuleiro
 
     iniciaTabuleiro(tabuleiro);
-    //Exibe o tabuleiro com suas linhas e colunas
-    exibeTabuleiro(tabuleiro);
+   
+    
 
-    while(rodada<9 && estadoDeJogo==1){
+    while(rodada < 9 && estadoDeJogo == 1){
+
         limpaTela();
 
-        cout << "Rodada: " << rodada <<"\n";
+        cout << "\nRodada: " << rodada <<"\n";
         cout << "Pontuacao: "<< nomeDoJogadorUm << " " << pontuacaoJogadorUm << " x "<< pontuacaoJogadorDois << " " << nomeDoJogadorDois;
+       
         exibeTabuleiro(tabuleiro);
+     
         //Exibe qual numero corresponde a qual posicao
         exibeInstrucoes();
      
@@ -121,13 +141,11 @@ void jogo(string nomeDoJogadorUm, string nomeDoJogadorDois, int pontuacaoJogador
         }
         posicionouJogada=false;
         //Matriz de posiceos possiveis
-        int posicoes[9][2] = {{2,0},{2,1},{2,2},
-                             {1,0}, {1,1}, {1,2}, 
-                             {0,0}, {0,1}, {0,2}};
+        int posicoes[9][2] = {{2,0},{2,1},{2,2},{1,0}, {1,1}, {1,2}, {0,0}, {0,1}, {0,2}};
 
-        while(posicionouJogada = false){
+        while(posicionouJogada == false){
             //Lê a jogada
-            cout << "\n" << nomeDoJogadorAtual << "Digite uma posicao conforme o mapa acima: ";
+            cout << "\n" << nomeDoJogadorAtual << ", Digite uma posicao conforme o mapa acima: ";
             cin >> posicaoJogada;
             //Passa a linha e coluna de acordo com a matriz de posicoes exibida no mapa
             linhaJogada=posicoes[posicaoJogada-1][0]; //posicoes[5-1][0] -> posicoes[4][0]
@@ -139,15 +157,19 @@ void jogo(string nomeDoJogadorUm, string nomeDoJogadorDois, int pontuacaoJogador
                 posicionouJogada=true;
             //Verifica de quem é a vez para posicionar o marcador
                 if(turnoDoJogador==1){
-                    tabuleiro[linhaJogada][colunaJogada] = 'x';
+                  char x[]={'x'};
+                   tabuleiro[linhaJogada][colunaJogada] = x[0];
                     turnoDoJogador=2;
                 }else{
-                    tabuleiro[linhaJogada][colunaJogada] = 'o';
+                    
+                     tabuleiro[linhaJogada][colunaJogada] = 'o';
                     turnoDoJogador=1;
-             }           
+             }
+                       
         }
+       
     }
-      
+       
         
         //Confere se o jogo acabou
         if(confereTabuleiro(tabuleiro) == 1){
@@ -160,8 +182,8 @@ void jogo(string nomeDoJogadorUm, string nomeDoJogadorDois, int pontuacaoJogador
             estadoDeJogo=0;
         }
         //Aumenta uma rodada
-        rodada+=1;
-        
+        rodada++;
+       
     }
     exibeTabuleiro(tabuleiro);
     cout << "Fim de jogo\n";
@@ -175,14 +197,15 @@ void jogo(string nomeDoJogadorUm, string nomeDoJogadorDois, int pontuacaoJogador
     }else if(opcao == 2){
         menuInicial();
     }
-
+   
 }
-
+   
 void menuInicial(){
+
     //Nome dos jogadores
     string nomeDoJogadorUm, nomeDoJogadorDois;
     int opcao=0;
-    while(opcao<1 || opcao>3){
+    while(opcao < 1 || opcao > 3){
         cout << "Bem vindo ao Jogo da Velha\n";
         cout << "1 - Jogar\n";
         cout << "2 - Sobre\n";
@@ -190,8 +213,7 @@ void menuInicial(){
         cout << "\nEscolha uma opcao e tecle ENTER\n";
         cin >> opcao;
         limpaTela();
-        switch (opcao)
-        {
+        switch(opcao){
         case 1:
             cout << "Digite o nome do jogador 1:\n";
             cin >> nomeDoJogadorUm;
@@ -202,13 +224,15 @@ void menuInicial(){
         case 2:
             cout << "Informacoes do jogo\n";
             break;
-        default:
+        case 3:
+            cout << "Ate mais!";
             break;
         }
 
     }
 }
 int main(){
+   
     menuInicial();
     return 0;
 }
