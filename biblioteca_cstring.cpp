@@ -18,7 +18,9 @@ int main(){
       char *c;
       char pesquisa2= 'C';
       char txt5[] = "CBF Cursos - Curso de C++ - www.youtube.com/cfbcursos";
+      char *c2;
       char key[]= "yt+w";
+      char key2= 'o';
       int i;
 
 	  strcpy(txt2,txt1);
@@ -47,5 +49,14 @@ int main(){
       cout << "Pos: " << i << endl;
       //Imprimir o elemento encontrado
       cout << "Pos: " << i <<  " - " << txt5[i] << endl;
+
+      c2 = strrchr(txt5,key2);
+      cout << "pos: " << c2-txt5 << endl;
+
+      c2 = strtok(txt5,",-");
+      while(c2!=NULL){
+          cout << c2 << endl;
+          c2 = strtok(NULL, ",-");
+      }
 	  return 0;
 }
