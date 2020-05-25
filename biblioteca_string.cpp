@@ -63,7 +63,41 @@ void verificarSeSaoIguais(char nome[], char nome2[]){
 int main(){
  	  char nome[] = "Marcos";
 	  char nome2[] = "Castro";
-	 
+	  string txt("CFB Cursos - Curso de C++"); //Recebe o valor no construtor
+	  string::iterator it;
+	  string::iterator it2; //retorna um ponteiro de it2;
+	  it= txt.begin(); //O iterator está apontando para o primeiro elemento da string txt 'c'
+	  it2= txt.end()-1; //O iterator está apontando para o ultimo elemento da string txt 'c' menos o terminador \o
+	  cout << txt << endl;
+	  cout << *it << endl;
+	  cout << *it2 << endl;
+
+	///Funcoes de capacidade
+	//Imprime o tamanho da string
+	  cout << txt.size() << endl;
+	  cout << txt.length() << endl;
+	  cout << txt.max_size() <<endl;	//Retorna o tamanho máximo que a string pode ter
+	  txt.resize(10);//Altera o tamanho da string
+	  cout << txt.size() << endl; //O tamanho agora é 10
+	  cout << txt << endl;
+	  cout << txt.capacity()<< endl; //Retorna o tamanho do espaco que foi alocado inicialmente pra string = 
+	  //25, será sempre o maior valor que foi utilizado para aquela string
+
+	  //txt.clear();//Limpa a string
+	  cout << txt << endl;
+	  if(txt.empty()){
+		  //Faz uma verificação, retornando true se a string estiver vazia e false se a sting não estiver vazia
+	  	cout << "String vazia" << endl;
+	  }else{
+		  //Imprime o conteudo da string:
+		  cout << txt << endl;
+	  } 
+
+	  cout << txt.capacity() << endl;
+	  txt.resize(25);
+	  cout << txt.capacity() << endl; //a string continua ocupando o espaço inicial mesmo após o resize para resolver utilizar a função
+	  txt.shrink_to_fit();//Reduz a capacidade da string em caso de diminuição de conteúdo. Resultará em 25. obs: Essa função possui o valor mínimo de redução = 15
+	  cout << txt.capacity() << endl;
 	  
 	  verificarSeSaoIguais(nome,nome2);
 	  verificarSeEMaiuscula(nome);
