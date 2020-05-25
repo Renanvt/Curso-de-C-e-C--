@@ -59,27 +59,12 @@ void verificarSeSaoIguais(char nome[], char nome2[]){
 	  	cout << "strings diferentes!"<<endl;
 	  }
 }
-struct {
-	char nome[40];
-}pessoa1,pessoa2;
+
 int main(){
-	char meunome[] = "Bruno";
  	  char nome[] = "Marcos";
 	  char nome2[] = "Castro";
-	  char txt1[50] = "Curso de programacao";
-	  char txt2[50]="c++";
-	  strcpy(txt2,txt1);
-	  strncpy(txt2,txt1,3); // Indica quantos caracteres quero copiar para o meu destino
-	  cout << txt2 << endl;
-	  memcpy(txt2,txt1,sizeof(txt1)+1);//Faz a copia do bloco de memoria ao inves da string. Nesse caso copia o bloco inteiro. +1 indica 
-	  // que quero copiar até o terminador
+	 
 	  
-	  memcpy(pessoa1.nome,meunome,strlen(meunome)+1);
-	  memcpy(pessoa2.nome,pessoa1.nome,sizeof(pessoa1.nome)+1); //pessoa2.nome -> pessoa1.nome
-	  memcmp(txt1,txt2,sizeof(txt1)//Compara os blocos de memória, enquanto strcmp compara diretamente a string
-	  
-	  cout << pessoa1.nome << endl;
-	  cout << pessoa2.nome << endl;
 	  verificarSeSaoIguais(nome,nome2);
 	  verificarSeEMaiuscula(nome);
 	  verificarSeEMinuscula(nome);
