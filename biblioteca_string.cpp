@@ -98,7 +98,39 @@ int main(){
 	  cout << txt.capacity() << endl; //a string continua ocupando o espaço inicial mesmo após o resize para resolver utilizar a função
 	  txt.shrink_to_fit();//Reduz a capacidade da string em caso de diminuição de conteúdo. Resultará em 25. obs: Essa função possui o valor mínimo de redução = 15
 	  cout << txt.capacity() << endl;
+	
+	cout << endl;
+
+	//FUNCOES PARA REFERENCIAR ACESSO A ELEMENTOS
+	  string txt2("CFB Cursos - Curso de C++ - www.youtube.com/cfbcursos");
+	  int tam=txt2.size(); // Retorna o elemento na posicao indicada
+	  cout << txt2.at(2);
+	  for(int i=0;i<tam;i++){
+		  cout << txt2.at(i); //retorna o elemento indicado na posicao é o mesmo que se fazer txt[i];
+	  }
+	  cout << endl;
+	  cout << txt2.back() << endl;;//Retorna a referencia para o ultimo elemento da string. =s
+	  txt2.back()= 'B'; // substiui o s pelo b no final da string
+	  cout << txt2 << endl;
+	  txt2.front()='F';//Retorna a referencia para o primeiro elemento da string. Nesse caso mudando de C para F
 	  
+	///FUNCOES MODIFICADORAS
+	string txt3("CFB Cursos");
+	txt3+= "Curso de c++"; // Contatena txt em txt3
+	txt3.append(" - Curso de c++"); // Contatena txt em txt3, o mesmo que +=
+	txt3.assign("Curso de C++");//Substitui o conteudo da string. O mesmo que txt3=("Curso de C++");
+	txt3.insert(10," - "); //Insere o novo conteudo da string em uma posicao especificada. Na posicao 10 vai inserir " - "
+	txt3.erase(10,5);//Remove determinado conteudo da string, passando dois parametros, o ponto inicial e a quantidade de elementos que quero remover. Nesse caso irá remover 5 elementos a partir da posicao 10
+
+	string txt4("CFB Cursos - Curso de C++");
+	string txt5="Javascript";
+	txt4.replace(22,4,txt5);//Substitui parte da string. Precisa informar 3 parâmetros, o ponto inicial, a quantidade de elementos e o que eu quero substituir. Nesse caso a partir da posicao 22, substituir todos os 4 elementos restantes, pelo conteudo de txt2
+	cout << txt4 << endl;
+	//Faz uma troca
+	txt3.push_back('B');//Adiciona um caracter no final da string. obs; essa funcao não contatena string
+	cout << txt3 << endl;
+	txt3.pop_back();//Remove o ultimo caracter da string
+	
 	  verificarSeSaoIguais(nome,nome2);
 	  verificarSeEMaiuscula(nome);
 	  verificarSeEMinuscula(nome);
