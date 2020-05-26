@@ -126,11 +126,53 @@ int main(){
 	string txt5="Javascript";
 	txt4.replace(22,4,txt5);//Substitui parte da string. Precisa informar 3 parâmetros, o ponto inicial, a quantidade de elementos e o que eu quero substituir. Nesse caso a partir da posicao 22, substituir todos os 4 elementos restantes, pelo conteudo de txt2
 	cout << txt4 << endl;
-	//Faz uma troca
+	string txt6("Curso");
+	string txt7="Aula";
+	txt6.swap(txt7);//Faz uma troca de uma string pela outra
+	cout << txt6 << endl; //Exibe Aula
+	cout << txt7 << endl; // Exibe Curso
+
 	txt3.push_back('B');//Adiciona um caracter no final da string. obs; essa funcao não contatena string
 	cout << txt3 << endl;
 	txt3.pop_back();//Remove o ultimo caracter da string
-	
+
+	//FUNCOES PARA OPERAÇÕES EM STRING
+	string txt8("Curso de C++ - Biblioteca string");
+	string txt9;
+	size_t encontrado = txt8.find("de");//find() -> Encontra uma determinada ocorrencia dentro da string, passando oque quero encontrar dentro da string. sempre que n encontrar a ocorrencia dentro da string, irá retornar o valor maximo de size_t
+	if(encontrado!=string::npos){//npos é uma constante estática que contem o valor maximo possivel de size_t
+		cout << "Encontrado na posicao " << encontrado <<endl; 
+	}else{
+		cout << "NAO encontrado" << endl;	
+	}
+	cout << encontrado << endl;
+	string txt10("Curso de c++ - Biblioteca string");
+	string txt11;
+	txt11=txt10.substr(15,10);//retorna uma nova string de acordo de uma posicao indicada de uma string ja existente, informando 2 parametros, o ponto inicial, e quantos caracteres a patir deste ponto eu quero retornar para a variavel que ira receber a nova string
+	cout << txt11 << endl; //Exibe biblioteca
+	string texto("Curso de c++");
+	string texto2("CFB Cursos");
+	if(texto.compare(txt2)==0){
+		cout << "Strings iguais" << endl;
+	}else{
+		cout << "Strings diferentes" << endl;
+	}
+	//Compara duas strings, se as strings forem iguais, retorna 0, se a primeira string for maior do que a segunda, retorna um numero maior do que 0, se a segunda for maior do que a primeira, retorna um numero menor do que 0
+
+	///FUNCOES PARA CONVERSAO
+	string texto3("18"),texto4;
+	int ano=2020,res;
+	res=ano-stoi(texto3); //Converte a string para numeral
+	cout << res <<endl; //Exibe 2002
+	texto4=to_string(res);//Conversao de inteiro para string
+	cout << texto4 << endl;
+	//stol // Conversao de string pra long int
+	//stoll // Conversao de string para long long int
+	//stoul // Conversao de string para unsigned long int
+	//stoull // Conversao de string para unsigned long long int
+	//stof // Conversao de String para float
+	// stod // Conversao de String para double
+	// stold // Conversao de string para long double
 	  verificarSeSaoIguais(nome,nome2);
 	  verificarSeEMaiuscula(nome);
 	  verificarSeEMinuscula(nome);
