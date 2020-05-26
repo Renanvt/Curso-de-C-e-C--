@@ -28,10 +28,14 @@ int main(){
 	  cout << txt2 << endl;
 	  memcpy(txt2,txt1,sizeof(txt1)+1);//Faz a copia do bloco de memoria ao inves da string. Nesse caso copia o bloco inteiro. +1 indica 
 	  // que quero copiar até o terminador
-	  
+	  cout << txt2 << endl;
 	  memcpy(pessoa1.nome,meunome,strlen(meunome)+1);
 	  memcpy(pessoa2.nome,pessoa1.nome,sizeof(pessoa1.nome)+1); //pessoa2.nome -> pessoa1.nome
-	  memcmp(txt1,txt2,sizeof(txt1));//Compara os blocos de memória, enquanto strcmp compara diretamente a string
+	  if(memcmp(txt1,txt2,sizeof(txt1) == 0)){//Compara os blocos de memória, enquanto strcmp compara diretamente a string
+        cout << "Blocos de memoria iguais" << endl;
+      }else{
+          cout << "Blocos de memoria diferentes" << endl;
+      }
       cout << pessoa1.nome << endl;
 	  cout << pessoa2.nome << endl;
 
