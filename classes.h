@@ -6,8 +6,10 @@ class Veiculo{
         int tipo;
         Veiculo(int tp);//Construtor
         int getVelMax();
-        void setVelMax(int vm);
+        bool getLigado(); //retorna se o carro está ligado ou desligado 
+        void setLigado(int l);
     private:
+        void setVelMax(int vm); //Pode ser acessado somente pela classe e não por fora
         string nome;
         int velMax;
         bool ligado;
@@ -25,6 +27,17 @@ Veiculo::Veiculo(int tp){
     }else if(tipo==3){
         nome="Navio";
         setVelMax(120);
+    }
+    setLigado(0);
+}
+bool Veiculo::getLigado(){
+    return ligado;
+}
+void Veiculo::setLigado(int l){
+    if(l==1){
+        ligado=true;
+    }else if(l==0){
+        ligado=false;
     }
 }
 
