@@ -1,5 +1,5 @@
 ﻿using namespace std;
-class Veiculo{
+class Veiculo{ //SUPERCLASSE
     public:
         int vel;
         int blind; //blindagem
@@ -14,11 +14,7 @@ class Veiculo{
         bool arma;
 };
 
-//Classe moto herda a classe veiculo
-class Moto:public Veiculo{
-    public:
-        Moto(); //Construtor
-};
+//DECLARACAO DOS METODOS
 void Veiculo::setTipo(int tp){
     tipo=tp;
 }
@@ -34,10 +30,14 @@ void Veiculo::imp(){
     cout << "Qtde rodas.......: " << rodas <<endl;
     cout << "Blindagem........: " << blind <<endl;
     cout << "Armamento........: " << arma <<endl;
-    cout << "-----------------------: " << tipo <<endl;
+    cout << "----------------------- " <<endl;
 
 }
-
+//SUBCLASSES
+class Moto:public Veiculo{ //HERANCA
+    public:
+        Moto(); //Construtor
+};
 Moto::Moto(){
     //Declaracao do construtor
     vel=0;
@@ -47,15 +47,27 @@ Moto::Moto(){
     setVelMax(120);
     setArma(false);
 }
-class Carro:public Veiculo{
+class Carro:public Veiculo{ //HERANCA
     public:
         Carro();
 };
-Carro::Carro{
+Carro::Carro(){ //Declaracao do construtor
     vel=0;
     blind=0;
     rodas=4;
     setTipo(2);
     setVelMax(180);
     setArma(false);
+}
+class Tanque:public Veiculo{ //Construtor
+    public:
+        Tanque();
+};
+Tanque::Tanque(){ //Declaracao do construtor
+    vel=0;
+    blind=1;
+    rodas=8;
+    setTipo(4);
+    setVelMax(200);
+    setArma(true);
 }
