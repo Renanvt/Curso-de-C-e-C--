@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include "Aviao.h"
+#include "construtor.h"
 using namespace std;
 int main(){
     Aviao *av1 = new Aviao(3);
